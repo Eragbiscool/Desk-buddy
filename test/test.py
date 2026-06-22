@@ -106,9 +106,9 @@ class TM1637Monitor:
     def start(self):
         cocotb.start_soon(self.run())
 
-PRESCALE = 10
-DEBOUNCE = 4
-CLICK_WINDOW = 8
+# PRESCALE = 10
+# DEBOUNCE = 4
+# CLICK_WINDOW = 8
 
 MODE_COIN, MODE_BUSY, MODE_SPRINT, MODE_MEETING, MODE_TASK, MODE_DUEL = range(6)
 
