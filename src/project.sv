@@ -450,13 +450,22 @@ module tt_um_luck_engine #(
         if (!rst_n) lfsr <= 16'hACE1;
         else        lfsr <= {lfsr[14:0], lfsr_fb};
 
-    // ─── Prescaler -> 1-second tick ─────────────────────────────────────────
+        // ─── Prescaler -> 1-second tick ─────────────────────────────────────────
     reg [23:0] presc_cnt;
-    wire tick_sec = (presc_cnt == PRESCALE[23:0] - 24'd1);
-    always @(posedge clk or negedge rst_n)
-        if (!rst_n)        presc_cnt <= 24'd0;
-        else if (tick_sec) presc_cnt <= 24'd0;
-        else               presc_cnt <= presc_cnt + 24'd1;
+    reg tick_sec_r;
+    wire tick_sec = tick_sec_r;
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            presc_cnt <= 24'd0;
+            tick_sec_r <= 1'b0;
+        end else begin
+            tick_sec_r <= (presc_cnt == PRESCALE[23:0] - 24'd1);
+            if (presc_cnt == PRESCALE[23:0] - 24'd1)
+                presc_cnt <= 24'd0;
+            else
+                presc_cnt <= presc_cnt + 24'd1;
+        end
+    end
 
     // Fast blink (~4 Hz at default PRESCALE) for DONE/result/blink-off cues
     reg [23:0] fast_cnt;
