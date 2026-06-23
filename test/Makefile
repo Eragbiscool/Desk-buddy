@@ -25,10 +25,10 @@ COMPILE_ARGS    += -DSIM
 COMPILE_ARGS    += -DUNIT_DELAY=\#1
 VERILOG_SOURCES += $(PDK_ROOT)/gf180mcuD/libs.ref/gf180mcu_fd_sc_mcu7t5v0/verilog/primitives.v
 VERILOG_SOURCES += $(PDK_ROOT)/gf180mcuD/libs.ref/gf180mcu_fd_sc_mcu7t5v0/verilog/gf180mcu_fd_sc_mcu7t5v0.v
-SIM_ARGS        += -vPRESCALE=10 \
-                   -vROLL_CYCLES=48 \
-                   -vTM_HALF_BIT_CYCLES=2 \
-                   -vCLICK_WINDOW_CYCLES=20
+COMPILE_ARGS    += -DPRESCALE=10 \
+                   -DROLL_CYCLES=48 \
+                   -DTM_HALF_BIT_CYCLES=2 \
+                   -DCLICK_WINDOW_CYCLES=20
 
 # this gets copied in by the GDS action workflow
 VERILOG_SOURCES += $(PWD)/gate_level_netlist.v
