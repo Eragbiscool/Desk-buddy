@@ -28,7 +28,12 @@ module tb ();
 `endif
 
   // DUT instantiation
-  tt_um_luck_engine user_project (
+ tt_um_luck_engine #(
+      .PRESCALE          (10),
+      .ROLL_CYCLES       (48),
+      .TM_HALF_BIT_CYCLES(2),
+      .CLICK_WINDOW_CYCLES(20)
+  ) user_project (
 
 `ifdef GL_TEST
       .VPWR(VPWR),
